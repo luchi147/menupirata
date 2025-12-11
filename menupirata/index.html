@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+
+            background-image: url("fondo.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .overlay {
+            backdrop-filter: brightness(0.75);
+            min-height: 100vh;
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        header {
+            font-size: 26px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .lang-btn {
+            padding: 15px 35px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.55);
+            transition: 0.2s;
+        }
+
+        .lang-btn:hover {
+            background: rgba(0, 0, 0, 0.75);
+            transform: translateY(-2px);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100vh;
+            border: none;
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* BOTÓN FLOTANTE PARA CAMBIAR IDIOMA */
+        .back-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.65);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.35);
+            display: none;
+            z-index: 999;
+        }
+
+        .back-btn:hover {
+            background: rgba(0,0,0,0.85);
+        }
+    </style>
+
+    <script>
+        function showMenu(lang) {
+            // Mostrar el menú elegido
+            document.getElementById("es").classList.remove("visible");
+            document.getElementById("en").classList.remove("visible");
+            document.getElementById(lang).classList.add("visible");
+
+            // Ocultar botones y header
+            document.getElementById("header").classList.add("hidden");
+            document.getElementById("buttons").classList.add("hidden");
+
+            // Mostrar botón flotante
+            document.getElementById("backButton").style.display = "block";
+
+            // Scroll arriba
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        function backToLanguages() {
+            // Ocultar PDFs
+            document.getElementById("es").classList.remove("visible");
+            document.getElementById("en").classList.remove("visible");
+
+            // Mostrar botones y header
+            document.getElementById("header").classList.remove("hidden");
+            document.getElementById("buttons").classList.remove("hidden");
+
+            // Ocultar botón flotante
+            document.getElementById("backButton").style.display = "none";
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="overlay">
+    <header id="header">MENÚ</header>
+
+    <div id="buttons" class="buttons">
+        <button class="lang-btn" onclick="showMenu('es')">Español</button>
+        <button class="lang-btn" onclick="showMenu('en')">English</button>
+    </div>
+
+    <iframe id="es" src="menu-pirata-espanol.pdf"></iframe>
+    <iframe id="en" src="menu-pirata-ingles.pdf"></iframe>
+
+    <!-- BOTÓN FLOTANTE PARA VOLVER A LOS IDIOMAS -->
+    <button id="backButton" class="back-btn" onclick="backToLanguages()">
+        Cambiar idioma
+    </button>
+
+</div>
+
+</body>
+</html>
+
